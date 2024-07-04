@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        
+    <header>
+        <div class="premier_bloc">
+            <p class='text1'>Bienvenue dans<br> l'univers d'<br><span id='infini1'>infni</span><br>Aujourd,hui<br> nous<br> allons<br>Créer<br> une<br> Calculatrice</p>
+    
+        </div>
+
+        
+        <div id="milieu">
+        <div class="but">
+            Pour créer cette calculatrice, les notions de <span class="design-grid"> grid en css </span> et les
+            <span class="design-JavaScript">Matrices en JavaScript </span> Nous serons
+            necessaire. <br>
+            <span class="design-happy">Happy reading</span>
+        </div>
+        <p class="solution">Solution</p>
+           
+    </div>
+    </header>
+
+    
+            
+
+
+
+
+
+<script>
+
+    
+    //construction propriete de la matrice
+
+
+    //création des texte
+    var matrice_text = new Array()
+
+        m_text1=["tg","sin","cos","","CE"]
+        m_text2 = ["x<sup>2","1","2","3","+"]
+        m_text3 = ["1/x","4","5","6","-"]
+        m_text4 = ["10<sup>x","7","8","9","*"]
+        m_text5 = ["e<sup>x","0",".","/","="]
+    
+        matrice_text = [m_text1,m_text2,m_text3,m_text4,m_text5]
+    //création des identifiants
+
+   
+
+    i=1
+
+    var matrice =new Array()
+    
+    var liste_id =new Array()
+   
+    while(i<6){
+        var matrice_ligne =new Array()
+        j=1
+       
+        while(j<6){
+           
+            identifiant ="id"+ i.toString()+j.toString()
+            liste_id.push(identifiant)
+         
+            elt = "<button " +" "   +"id = "+identifiant+ " "+"class = item" +" "+">"+matrice_text[i-1][j-1]
+            
+            matrice_ligne.push(elt)
+            j=j+1
+
+           
+            
+        }
+
+        matrice.push(matrice_ligne)
+        
+        i=i+1
+
+    } 
+ 
+
+    //Création de la chaine
+
+    var chaine = " <p id = 'resultat'><div id ='calculatrice'>"
+    i=0
+    while(i<5){
+        j=0
+        while(j<5){
+            var indice = i 
+            var x = matrice[indice][j]
+            chaine=chaine+x
+            j=j+1
+
+        }
+
+        i=i+1
+    }
+    
+
+    
+    var calculatrice = document.createElement('div')
+    calculatrice.id="container"
+    
+    calculatrice.innerHTML=chaine
+    
+
+    document.body.appendChild(calculatrice)
+
+    
+    var body = document.body
+    body.innerHTML=body.innerHTML+"<p id = 'dernier'>Voilà un exercie pratique qui peut vous aidez à vous ameliorez en JavaScript, surtout essayez de le faire le plus simple possible , car elle sert juste office d'entrainement</p>"
+       
+
+    var liste_element = new Array()
+    i=0
+    while(i<25){
+        elt = liste_id[i]
+        var element = document.getElementById(elt)
+        liste_element.push(element)
+        i=i+1
+    }
+    var x1 = document.getElementById("id11")
+    
+    var x2= document.getElementById("id12")
+    
+    i=0
+
+
+
+
+   
+    function recherche(liste,x){
+        var i=0
+        var ok = (liste[i]==x)
+        while(ok==false && i<liste.length){
+            ok = (liste[i]==x)
+            if(ok==true){break}
+            else
+            i=i+1
+
+        }
+
+        return ok
+        
+
+    }
+
+
+
+    function calcule(list){
+
+        var i=0
+        var new_list = new Array()
+        
+        while(i<list.length){
+            var ok1 = (liste[i+1]=="*")
+            var ok2 = (liste[i+1]=="*")
+            var ok2 = (liste[i+1]=="*")
+            var ok2 = (liste[i+1]=="*")
+
+
+
+            if(ok==true){
+
+
+                    var x = liste[i]
+                    var y = liste[i+2]
+                    var z = x*y
+                    i=i+3
+                    new_list.push(z)
+          
+             }
+
+            else{
+                new_list.push(liste[i])
+                i=i+1
+            }
+
+           
+            
+            
+        }
+
+        return new_list
+   
+    }
+
+
+
+
+
+
+
+    //Fonction qui recupère à partir d'une position
+
+    function fonction_position(chaine,position){
+        var i=position
+        var chaine2 = ""
+
+        while(i<chaine.length){
+           chaine2 = chaine2+chaine[i]
+            i=i+1
+
+        }
+
+        return chaine2
+
+
+        
+    }
+    
+
+    function addition(a,b){
+        return a+b
+    }
+
+    function soustraction(a,b){
+        return a-b
+    }
+
+    function division(a,b) {
+        return a/b
+    }
+
+    function multiplication(a,b){
+        return a*b
+    }
+
+    function calculate(a,b,operateur){
+
+        if(operateur=="+"){return a+b}
+        if(operateur=="-"){return a-b}
+        if(operateur=="*"){return a*b}
+        if(operateur="/"){return a/b}
+
+    }
+
+    function multipli(liste){
+         var i=0
+         var som=liste[i]
+
+        
+        while(i<liste.length-2){
+            x=liste[i+2]
+            opera=liste[i+1]
+            som=calculate(som,x,opera)
+            i=i+2
+           
+         } 
+        
+         return som
+         
+
+
+    }
+
+
+    function suprime(chaine){
+         
+        var dernier = chaine.charAt(chaine.length-1)
+       if(verif(dernier)==true){
+         
+        return chaine
+       }
+       else{
+            var i=0
+            chaine_new=""
+            while(i<chaine.length-1){
+                var x=chaine.charAt(i)
+                chaine_new+=x 
+                i+=1
+            }
+
+            
+            return chaine_new
+
+
+       }
+
+       
+
+    }
+
+     
+
+
+    
+    function recherche_indice(liste,x){
+        var i=0
+        var indice=0
+        var ok = (liste[i]==x)
+        while(ok==false && i<liste.length){
+            ok = (liste[i]==x)
+            if(ok==true){indice=i;break}
+            else
+            i=i+1
+
+        }
+         
+        if(indice!=0){return indice}
+        else {return -1}
+        
+
+    }
+
+
+    function recherche_element(liste,x){
+
+        i=0 
+        var tableau = new Array()
+        while(i<liste.length){
+           
+            y = liste[i]
+            if(y==x){tableau.push(i)}
+           
+            i=i+1
+
+
+        } 
+        
+        return tableau
+   
+    }
+ 
+
+
+
+    function renverse(liste){
+
+        for(let i=0;i<liste.length;i++)
+        {
+            x=liste[i]
+            y=liste[i+1]
+            if(y<x){
+                liste[i]=y
+                
+                liste[i+1]=x
+            }
+       
+        }
+ 
+        return liste
+   
+   
+   
+    }
+
+    function tri(liste){
+
+        var i=0
+        while(i<1000){
+            liste=renverse(liste)
+            i=i+1
+             
+        } 
+        
+        return liste
+    }
+
+    
+   
+
+
+
+
+
+    function recherche_plus_moins(liste){
+
+        var tableau1=recherche_element(liste,"+")
+       var tableau2 = recherche_element(liste,"-")
+       
+        tableau1= tableau1.concat(tableau2)
+      tableau1=tri(tableau1)
+
+      return(tableau1)
+         
+    }
+    
+    function recherche_plus_moins(liste){
+
+        var tableau1=recherche_element(liste,"*")
+        var tableau2 = recherche_element(liste,"/")
+
+        tableau1= tableau1.concat(tableau2)
+        tableau1=tri(tableau1)
+
+        return(tableau1)
+ 
+        }
+
+    
+    function somme(liste){
+
+         
+        let i = 0
+        let j=0
+
+        
+        while(i<10){
+            
+            if(recherche_indice(liste,"*")!=-1){
+
+                let position=recherche_indice(liste,"*")
+                let x= liste[position-1]
+                let y =liste[position+1]
+                let z=x*y 
+                liste.splice(position-1,3,z)
+               
+
+            }
+
+
+            if(recherche_indice(liste,"/")!=-1){
+
+            let position=recherche_indice(liste,"/")
+            let x= liste[position-1]
+            let y =liste[position+1]
+            let z=x/y 
+            liste.splice(position-1,3,z)
+ 
+            }
+
+
+
+
+ 
+            
+
+            i=i+1
+       
+        }
+
+
+
+        result=multipli(liste)
+
+        
+
+        return result
+
+
+
+
+    }
+
+     
+     
+
+ 
+         
+
+    
+
+function chaine_tableau(chaine){
+    
+    var i=0
+    var j=0
+    var nombre =chaine.charAt(j)
+    var tableau=[]
+    while(i<100){
+         
+
+        var y=chaine.charAt(j+1)
+
+        if(verif(y)==false && chaine.length>j){
+            
+            nombre=parseFloat(nombre)
+            tableau.push(nombre)
+           
+            if(chaine.length>j+1){
+                tableau.push(y)
+            
+            }
+            
+            j=j+2
+            nombre=chaine.charAt(j)
+ 
+
+       
+        }
+        else{
+            nombre=nombre+y 
+            j=j+1
+
+        }
+
+
+
+
+
+        i=i+1
+    }
+ 
+    return tableau
+
+}
+ 
+
+
+chaine="2323*21232434312123*1"
+tab = chaine_tableau(chaine)
+/*for(let i =0 ;i<tab.length;i++){
+    console.log("indice "+i+" : "+tab[i])
+}*/
+
+
+
+
+
+function f11(n){
+    return Math.tan(n)
+}
+ 
+function f12(n){
+    return Math.sin(n)
+}
+
+function f13(n){
+    return Math.cos(n)
+}
+function f21(n){
+    return n*n
+}   
+
+function f31(n){
+
+    return 1/n
+}
+ 
+function f41(n){
+    return Math.pow(10,n)
+}
+function f51(n){
+    const e=Math.E
+    return Math.pow(e,n)
+}
+
+function f0(n){
+    alert("infni")
+}
+
+
+
+
+function f14(){
+    var chaine=resultat.innerHTML
+    var i=0
+    chaine_new=""
+    while(i<chaine.length-1){
+        var x=chaine.charAt(i)
+        chaine_new+=x 
+        i+=1
+
+
+
+    }
+    resultat.innerHTML=chaine_new
+
+    return chaine_new
+
+    } 
+
+
+
+    function f15(){
+        resultat.innerHTML=""
+    }
+
+  
+
+
+
+
+    var liste_resultat =new Array()
+    var liste_resultat_stock = new Array()
+    var liste_position_chaine=new Array()
+    var tableau_resultat=[]
+    
+
+    var liste_fonction =["id11","id12","id13","id14","id15","id21","id31","id41","id51","id55","id25","id35","id45","id54"]
+    var liste_operation =["id25","id35","id45","id54"]
+    var liste_maths=["id00","id11","id12","id13","id21","id31","id41","id51"]
+    var fontion_maths=[f0,f11,f12,f13,f21,f31,f41,f51]
+    var operation_en_cours = false
+    var  valeur_operation_en_cours =""   
+    var resultat_en_cours=false
+    var premier =true
+
+    while(i<25){
+        
+        var element = liste_element[i]
+        var resultat = document.getElementById("resultat")
+       
+        var stock = ""
+        var position=0
+        var result =""
+        
+
+       
+        element.addEventListener('click',function (){
+            var identifiant = this.id
+            var ok =recherche(liste_fonction,identifiant)
+            var ok2 =recherche(liste_operation,identifiant)
+            var ok3 =(identifiant=="id55")
+            var texte=document.getElementById(identifiant).textContent
+            
+            if(ok==false && ok2==false && ok3==false){
+                
+                operation_en_cours=false
+                resultat.innerHTML=resultat.innerHTML+texte 
+                stock=stock+resultat.innerHTML
+                premier=false
+                     
+            } 
+
+            if(ok2==true && operation_en_cours==false && premier==false){ 
+
+                stock=parseInt(stock)
+                tableau_resultat.push(stock)
+                tableau_resultat.push(texte)
+                stock=""
+                resultat.textContent=resultat.textContent+texte
+                operation_en_cours=true
+                
+            }
+
+            if(ok3==true ){
+                var texte_resultat=resultat.innerHTML
+                var texte_resultat=suprime(texte_resultat)
+                var list=chaine_tableau(texte_resultat)
+                var resultat_finale=somme(list)
+                resultat.textContent=resultat_finale
+                operation_en_cours=false
+               
+                
+            }
+
+            if(identifiant=="id15"){
+                f15(identifiant)
+                operation_en_cours = false
+                valeur_operation_en_cours =""   
+                resultat_en_cours=false
+                premier =true
+            }
+
+            if(identifiant=="id14"){
+                f14()
+                
+            }
+            if(recherche_indice(liste_maths,identifiant)!=-1)
+            {   
+                var indice_id=recherche_indice(liste_maths,identifiant)
+                var f=fontion_maths[indice_id]
+                var texte_resultat=resultat.innerHTML
+                var texte_resultat=suprime(texte_resultat)
+                var list=chaine_tableau(texte_resultat)
+                var resultat_finale1=somme(list)
+                var resultat_finale2=f(resultat_finale1)
+              
+
+                resultat.textContent=resultat_finale2
+                
+
+                
+                operation_en_cours=false
+                 
+
+
+
+
+            }
+ 
+          
+        
+        
+        })
+        
+
+        i=i+1
+    }
+
+
+    //Algorithme qui lit une chaine
+
+    function verif1(n){
+        n=parseInt(n)
+        ok=( n>=-10000000000000000000 && n<100000000000000)
+        
+        if(ok==true)return true
+        else return false
+         
+    } 
+
+function verif2(n){
+    ok =(n=='.')
+    return ok
+}
+
+function verif(n){
+    ok=(verif1(n)==true || verif2(n)==true)
+    return ok
+
+}
+
+</script>
+  
+<script>
+  let largeur = screen.width
+  let longueur =screen.height
+  
+
+
+  //Fonction qui permet d'ajuster les marges,font, padding d'un element
+  function ajuste(identifiant,largeur_g,largeur_p,fg,fp){
+     
+
+      var element = document.getElementById(identifiant)
+      var largeur_x = screen.width
+      var diff_font = fg-fp
+      var diff_largeur = largeur_g-largeur_p
+
+      var coefficient = diff_largeur/diff_font
+
+      diff =largeur_x-largeur_p
+
+
+      var pas = diff/coefficient
+
+      pas = pas+fp 
+      pas = parseInt(pas)
+      
+     
+      resultat_font = pas.toString()+"px"
+    
+    
+      
+      return resultat_font
+
+
+  }
+  
+  
+  function ajuste_liste(identifiant,largeur_g,largeur_p,liste_g,liste_p){
+      
+    elt1 = ajuste(identifiant,largeur_g,largeur_p,liste_g[0],liste_p[0])
+    elt2 = ajuste(identifiant,largeur_g,largeur_p,liste_g[1],liste_p[1])
+
+    elt3 = ajuste(identifiant,largeur_g,largeur_p,liste_g[2],liste_p[2])
+
+    elt4 = ajuste(identifiant,largeur_g,largeur_p,liste_g[3],liste_p[3])
+
+    return [elt1,elt2,elt3,elt4]
+
+  }
+
+
+  function ajuste_font(identifiant,largeur_g,largeur_p,fg,fp){
+      var element = document.getElementById(identifiant)
+      var new_font = ajuste(identifiant,largeur_g,largeur_p,fg,fp)
+
+      element.style.fontSize = new_font
+  }
+
+  function ajuste_pad(identifiant,largeur_g,largeur_p,liste_g,liste_p){
+
+      var element  = document.getElementById(identifiant)
+      var new_pad_list = ajuste_liste(identifiant,largeur_g,largeur_p,liste_g,liste_p)
+      var new_pad = new_pad_list[0]+" "+new_pad_list[1]+" "+new_pad_list[2]+" "+new_pad_list[3]
+      element.style.padding=new_pad
+     
+  }
+
+
+  function ajuste_pad(identifiant,largeur_g,largeur_p,liste_g,liste_p){
+
+      var element  = document.getElementById(identifiant)
+      var new_pad_list = ajuste_liste(identifiant,largeur_g,largeur_p,liste_g,liste_p)
+      var new_pad = new_pad_list[0]+" "+new_pad_list[1]+" "+new_pad_list[2]+" "+new_pad_list[3]
+      element.style.margin=new_pad
+
+} 
+  
+</script>
+</body>
+</html>
